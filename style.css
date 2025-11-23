@@ -1,0 +1,144 @@
+:root {
+    /* Cores Principais */
+    --primary-purple: #667eea;
+    --secondary-purple: #764ba2;
+    --accent-gold: #FFD700;
+    --accent-orange: #FFA500;
+    --success-green: #00FF00;
+    --dark-green: #008000;
+    --error-red: #e74c3c;
+    --warning-orange: #f39c12;
+    --info-blue: #3498db;
+    
+    /* Cores de Texto */
+    --text-dark: #333333;
+    --text-medium: #555555;
+    --text-light: #777777;
+    --text-white: #ffffff;
+    
+    /* Cores de Fundo */
+    --bg-white: #ffffff;
+    --bg-light: #f8f9fa;
+    --bg-dark: #2c3e50;
+    --bg-overlay: rgba(0, 0, 0, 0.5);
+    
+    /* Cores de Estado */
+    --hover-primary: #5a6fd8;
+    --hover-secondary: #6b4a9a;
+    --hover-accent: #ffcc00;
+    --active-primary: #4a5fc7;
+    
+    /* Gradientes */
+    --gradient-primary: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+    --gradient-accent: linear-gradient(45deg, var(--accent-gold), var(--accent-orange));
+    --gradient-success: linear-gradient(45deg, var(--success-green), var(--dark-green));
+    --gradient-overlay: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+    
+    /* Sombras */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 15px rgba(0,0,0,0.2);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.3);
+    --shadow-xl: 0 20px 40px rgba(0,0,0,0.4);
+    --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.5);
+    
+    /* Bordas */
+    --border-radius-sm: 8px;
+    --border-radius-md: 15px;
+    --border-radius-lg: 25px;
+    --border-radius-xl: 50px;
+    --border-radius-circle: 50%;
+    
+    /* Espaçamentos */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 40px;
+    --spacing-xxl: 50px;
+    
+    /* Tipografia */
+    --font-family: 'Poppins', sans-serif;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Tamanhos de Fonte */
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-xxl: 24px;
+    --font-size-xxxl: 32px;
+    --font-size-hero: 42px;
+    
+    /* Transições */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Z-index */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+    --z-loading: 9999;
+    
+    /* Breakpoints */
+    --breakpoint-mobile: 480px;
+    --breakpoint-tablet: 768px;
+    --breakpoint-desktop: 1024px;
+    --breakpoint-wide: 1200px;
+    
+    /* Efeitos Visuais */
+    --backdrop-blur: blur(15px);
+    --backdrop-brightness: brightness(0.9);
+    --backdrop-saturate: saturate(1.2);
+    
+    /* Animações */
+    --animation-duration-fast: 0.3s;
+    --animation-duration-normal: 0.5s;
+    --animation-duration-slow: 0.8s;
+    --animation-timing: ease;
+    
+    /* Layout */
+    --container-max-width: 600px;
+    --header-height: 80px;
+    --footer-height: 60px;
+    --sidebar-width: 280px;
+    
+    /* Componentes Específicos */
+    --banner-background: rgba(255, 255, 255, 0.95);
+    --banner-border: 3px solid rgba(255, 255, 255, 0.3);
+    --banner-backdrop: blur(15px);
+    
+    --button-padding: 20px 40px;
+    --button-font-size: 22px;
+    --button-border: none;
+    --button-cursor: pointer;
+    
+    --input-padding: 15px 20px;
+    --input-border: 2px solid var(--primary-purple);
+    --input-radius: var(--border-radius-md);
+    
+    --card-padding: var(--spacing-xl);
+    --card-background: var(--bg-white);
+    --card-shadow: var(--shadow-md);
+    
+    /* Estados de Acessibilidade */
+    --focus-ring: 0 0 0 3px rgba(102, 126, 234, 0.3);
+    --focus-outline: 2px solid var(--primary-purple);
+    
+    /* Modo Escuro (para futura implementação) */
+    --dark-primary: #7e93ff;
+    --dark-secondary: #9b6bff;
+    --dark-bg: #1a1a2e;
+    --dark-text: #e0e0e0;
+}

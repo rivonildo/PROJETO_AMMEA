@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerar Ícone 512x512</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .icon-container {
+            width: 512px;
+            height: 512px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 128px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .icon-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+        
+        .heart {
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(4px 4px 8px rgba(0,0,0,0.3));
+        }
+        
+        .text {
+            position: absolute;
+            bottom: 40px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .instructions {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon-container">
+        <div class="heart">💝</div>
+        <div class="text">AMMEA</div>
+    </div>
+    
+    <div class="instructions">
+        <h3>Como salvar o ícone:</h3>
+        <p>1. Clique direito no quadrado azul acima</p>
+        <p>2. Selecione "Salvar imagem como..."</p>
+        <p>3. Nomeie como <strong>icon-512.png</strong></p>
+        <p>4. Salve na pasta <strong>assets/images/</strong></p>
+    </div>
+</body>
+</html>

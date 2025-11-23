@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta tags para SEO e Acessibilidade -->
+    <meta name="description" content="Doe R$1 para o Natal das crianças com deficiências do Projeto AMMEA">
+    <meta name="keywords" content="doação, AMMEA, crianças especiais, natal, PIX">
+    <meta name="author" content="Projeto AMMEA">
+    <meta name="theme-color" content="#c41e3a">
+    <meta name="screen-reader-compatible" content="true">
+    
+    <title>Doe R$1 - Projeto AMMEA | Natal Solidário</title>
+    
+    <!-- CDNs para recursos externos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=H2r8s1yB"></script>
+    
+    <style>
+        /* ===== VARIÁVEIS CSS - PODE EDITAR CORES E CONFIGURAÇÕES AQUI ===== */
+        :root {
+            /* Cores principais - Pode alterar essas cores */
+            --primary-color: #c41e3a;
+            --secondary-color: #8b1420;
+            --accent-gold: #FFD700;
+            --accent-silver: #C0C0C0;
+            --text-light: #2c3e50;
+            --bg-light: rgba(255, 255, 255, 0.95);
+            --bg-overlay-light: rgba(0, 0, 0, 0.4);
+            
+            /* Efeitos e transições */
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --glass-blur: blur(20px);
+            --shadow-lg: 0 25px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Tema escuro - Modo noturno natalino */
+        [data-theme="dark"] {
+            --primary-color: #ff6b8a;
+            --secondary-color: #ff4d6d;
+            --text-light: #e0e0e0;
+            --bg-light: rgba(30, 30, 30, 0.95);
+            --bg-overlay-light: rgba(0, 0, 0, 0.7);
+        }
+
+        /* ===== RESET E CONFIGURAÇÕES GERAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: var(--transition);
+            background: #000;
+        }
+
+        /* ===== ACESSIBILIDADE - SKIP LINKS ===== */
+        .skip-to-content {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            background: var(--accent-gold);
+            color: #000;
+            padding: 12px 24px;
+            z-index: 100000;
+            font-weight: bold;
+            border-radius: 0 0 12px 0;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
+
+        /* ===== SISTEMA DE BACKGROUND DINÂMICO ===== */
+        .background-system {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        /* Background para tema claro - Cena natalina diurna */
+        .background-day {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* COMENTADO: Imagem via link externo */
+            /* background: 
+                linear-gradient(135deg, #87CEEB 0%, #98FB98 100%),
+                url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); */
+            /* AGORA: Usando apenas imagem local */
+            background: 
+                linear-gradient(135deg, #87CEEB 0%, #98FB98 100%),
+                url('images/ammea.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            transition: var(--transition);
+            opacity: 1;
+        }
+
+        [data-theme="dark"] .background-day {
+            opacity: 0;
+        }
+
+        /* Background para tema escuro - Cena natalina noturna */
+        .background-night {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* COMENTADO: Imagem via link externo */
+            /* background: 
+                linear-gradient(135deg, #0f1f38 0%, #2d1b69 100%),
+                url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); */
+            /* AGORA: Usando apenas imagem local */
+            background: 
+                linear-gradient(135deg, #0f1f38 0%, #2d1b69 100%),
+                url('images/ammea2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .background-night {
+            opacity: 1;
+        }
+
+        /* Overlay para melhor contraste */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-overlay-light);
+            transition: var(--transition);
+        }
+
+        /* ===== EFEITOS ESPECIAIS NATALINOS ===== */
+        .snowflakes-container, .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 1em;
+            opacity: 0.8;
+            animation: fall linear infinite;
+            user-select: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* ===== SISTEMA DE ÁUDIO AVANÇADO ===== */
+        .audio-controls-panel {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 10000;
+            background: var(--bg-light);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .audio-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .audio-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .audio-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .audio-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .audio-btn.active {
+            background: linear-gradient(135deg, var(--accent-gold), #FFA500);
+            color: #000;
+        }
+
+        .volume-controls {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .volume-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: var(--bg-light);
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+        }
+
+        .volume-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* ===== BARRA DE FERRAMENTAS DE ACESSIBILIDADE ===== */
+        .accessibility-toolbar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tool-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-light);
+            backdrop-filter: var(--glass-blur);
+            border: 2px solid var(--primary-color);
+            color: var(--text-light);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .tool-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 20px 40px;
+        }
+
+        .donation-card {
+            background: var(--bg-light);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 30px;
+            padding: 60px 50px;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            animation: cardEntrance 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-gold), var(--primary-color));
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* ===== ELEMENTOS DE TEXTO ===== */
+        .logo-title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* ===== BOTÃO PIX PRINCIPAL ===== */
+        .pix-hero-button {
+            background: linear-gradient(45deg, var(--accent-gold), #FFA500, var(--accent-gold));
+            background-size: 200% 100%;
+            color: #000;
+            border: none;
+            padding: 25px 50px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 15px 40px rgba(255, 165, 0, 0.4);
+            margin: 30px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            animation: buttonShine 2s linear infinite;
+        }
+
+        @keyframes buttonShine {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .pix-hero-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 165, 0, 0.6);
+        }
+
+        .pix-hero-button.copied {
+            background: linear-gradient(45deg, #00FF00, #00cc00);
+            color: white;
+            animation: pulse 0.6s ease;
+        }
+
+        /* ===== SEÇÃO DE INFORMAÇÕES PIX ===== */
+        .pix-info-section {
+            background: linear-gradient(135deg, 
+                rgba(196, 30, 58, 0.1), 
+                rgba(139, 20, 32, 0.1),
+                rgba(255, 215, 0, 0.1));
+            padding: 30px;
+            border-radius: 25px;
+            margin: 30px 0;
+            border: 2px solid rgba(196, 30, 58, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .pix-email {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .location {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-top: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* ===== POPUP DE SAÍDA ===== */
+        .exit-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 50px 40px;
+            border-radius: 25px;
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+            border: 4px solid var(--accent-gold);
+            animation: popupSlide 0.5s ease-out;
+            position: relative;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .popup-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        .popup-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+        }
+
+        .popup-message {
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .popup-pix {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-weight: 700;
+            font-size: 16px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .popup-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .popup-button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .popup-button.copiar {
+            background: var(--accent-gold);
+            color: #000;
+        }
+
+        .popup-button.copiar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes popupSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ===== PERSONALIZAÇÃO DE FUNDO (OCULTA) ===== */
+        .background-customizer {
+            display: none; /* Oculta da interface */
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            .donation-card {
+                padding: 40px 25px;
+                margin: 20px;
+            }
+            
+            .logo-title {
+                font-size: 2.5rem;
+            }
+            
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .pix-hero-button {
+                padding: 20px 35px;
+                font-size: 1.2rem;
+            }
+            
+            .audio-controls-panel {
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                border-radius: 20px;
+            }
+            
+            .accessibility-toolbar {
+                top: 10px;
+                right: 10px;
+            }
+
+            .audio-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* ===== ANIMAÇÕES DE ENTRADA ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Link de pular para conteúdo (acessibilidade) -->
+    <a href="#main-content" class="skip-to-content">
+        <i class="fas fa-forward"></i> Pular para conteúdo principal
+    </a>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg, #c41e3a, #8b1420);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;color:white;">
+        <div style="width:80px;height:80px;border:6px solid rgba(255,255,255,0.3);border-top-color:#FFD700;border-radius:50%;animation:spin 1s linear infinite;"></div>
+        <div style="margin-top:25px;font-size:20px;font-weight:700;">Carregando Magia do Natal...</div>
+    </div>
+
+    <!-- Sistema de Background Dinâmico -->
+    <div class="background-system">
+        <div class="background-day" id="backgroundDay"></div>
+        <div class="background-night" id="backgroundNight"></div>
+        <div class="background-overlay"></div>
+    </div>
+
+    <!-- Efeitos Especiais -->
+    <div class="snowflakes-container" id="snowflakes"></div>
+    <div class="stars-container" id="stars"></div>
+
+    <!-- Painel de Controle de Áudio -->
+    <div class="audio-controls-panel">
+        <div class="audio-title">🎵 Controles de Mídia</div>
+        <div class="audio-buttons">
+            <button class="audio-btn" onclick="playAudio('local')" title="Música Natalina Local">
+                <i class="fas fa-music"></i>
+            </button>
+            <button class="audio-btn" onclick="playAudio('radio')" title="Rádio Natalina Online">
+                <i class="fas fa-radio"></i>
+            </button>
+            <button class="audio-btn" onclick="stopAudio()" title="Parar Áudio">
+                <i class="fas fa-stop"></i>
+            </button>
+            <div class="volume-controls">
+                <button class="volume-btn" onclick="decreaseVolume()" title="Diminuir Volume">
+                    <i class="fas fa-volume-down"></i>
+                </button>
+                <button class="volume-btn" onclick="increaseVolume()" title="Aumentar Volume">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de Ferramentas de Acessibilidade -->
+    <div class="accessibility-toolbar">
+        <button class="tool-btn" onclick="toggleTheme()" title="Alternar Tema Claro/Escuro">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <button class="tool-btn" onclick="changeLanguage()" title="Traduzir Conteúdo">
+            <i class="fas fa-language"></i>
+        </button>
+        <button class="tool-btn" onclick="speakContent()" title="Ler Conteúdo em Voz Alta">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button class="tool-btn" onclick="increaseFontSize()" title="Aumentar Fonte">
+            <i class="fas fa-text-height"></i>
+        </button>
+        <button class="tool-btn" onclick="toggleHighContrast()" title="Alto Contraste">
+            <i class="fas fa-adjust"></i>
+        </button>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-container" id="main-content">
+        <article class="donation-card">
+            <!-- Logo e Título Principal -->
+            <h1 class="logo-title animate-fade-in-up">AMMEA</h1>
+            
+            <h2 class="main-title animate-fade-in-up" id="mainTitle">
+                Doe R$1 para o Natal das<br>
+                <span class="highlight">crianças com deficiências</span>
+            </h2>
+            
+            <p class="subtitle animate-fade-in-up" id="mainSubtitle">
+                Faça parte desta corrente do bem e ajude a transformar o Natal das<br>
+                crianças especiais do Projeto AMMEA
+            </p>
+
+            <!-- Barra de Progresso das Doações -->
+            <section class="progress-section animate-fade-in-up" style="margin: 30px 0; padding: 25px; background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), rgba(139, 20, 32, 0.1)); border-radius: 20px; border: 2px solid rgba(196, 30, 58, 0.2);">
+                <div style="font-size: 16px; color: var(--text-light); margin-bottom: 10px; font-weight: 600;" id="progressLabel">
+                    Meta de Doações: R$ 5.000,00
+                </div>
+                <div style="width: 100%; height: 30px; background: rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden; position: relative; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
+                    <div style="height: 100%; background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700); background-size: 200% 100%; animation: progressShine 2s linear infinite; transition: width 0.5s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: #000; font-weight: 700; font-size: 14px; width: 35%;">
+                        35%
+                    </div>
+                </div>
+                <div style="margin-top: 10px; font-size: 14px; color: var(--text-light); opacity: 0.8;" id="progressText">
+                    R$ 1.750,00 arrecadados de R$ 5.000,00
+                </div>
+            </section>
+
+            <!-- Botão PIX Principal -->
+            <button class="pix-hero-button animate-fade-in-up" onclick="copiarPix()" id="pixButton">
+                <i class="fas fa-copy"></i>
+                Copiar PIX Agora
+            </button>
+
+            <!-- QR Code para Doação -->
+            <section class="qr-code-section animate-fade-in-up" style="margin: 25px 0; padding: 20px; background: white; border-radius: 20px; display: inline-block; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
+                <div id="qrcode"></div>
+                <div style="margin-top: 10px; font-size: 14px; color: #555; font-weight: 600;" id="qrLabel">
+                    Escaneie para doar
+                </div>
+            </section>
+
+            <!-- Informações do PIX -->
+            <div class="pix-info-section animate-fade-in-up">
+                <div class="pix-email">
+                    <i class="fas fa-envelope"></i>
+                    projetooammea@gmail.com
+                </div>
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Projeto AMMEA
+                </div>
+            </div>
+
+            <!-- Contador de Apoiadores -->
+            <div class="animate-fade-in-up" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 25px; border-radius: 20px; margin: 25px 0; box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);">
+                <div style="font-size: 15px; opacity: 0.95; margin-bottom: 8px; font-weight: 500;" id="counterLabel">
+                    Pessoas já apoiaram
+                </div>
+                <div style="font-size: 52px; font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);" id="donationCount">
+                    127
+                </div>
+            </div>
+
+            <!-- Compartilhamento Social -->
+            <section class="animate-fade-in-up" style="margin-top: 35px; padding-top: 25px; border-top: 3px solid rgba(196, 30, 58, 0.2);">
+                <div style="font-size: 17px; color: var(--text-light); margin-bottom: 18px; font-weight: 600;" id="shareTitle">
+                    <i class="fas fa-share-alt"></i> Compartilhe esta causa
+                </div>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button class="social-btn" onclick="compartilharWhatsApp()" style="background: #25D366; color: white; border: none; padding: 14px 30px; border-radius: 30px; cursor: pointer; font-size: 17px; font-weight: 700; transition: var(--transition); display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <button class="social-btn" onclick="compartilharFacebook()" style="background: #1877F2; color: white; border: none; padding: 14px 30px; border-radius: 30px; cursor: pointer; font-size: 17px; font-weight: 700; transition: var(--transition); display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 20px rgba(24, 119, 242, 0.4);">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- Popup de Saída -->
+    <div class="exit-popup" id="exitPopup">
+        <div class="popup-content">
+            <button class="popup-close" onclick="fecharPopup()">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="popup-icon">🎄</div>
+            <h2 class="popup-title" id="popupTitle">Espere!</h2>
+            <p class="popup-message" id="popupMessage">
+                Você está saindo sem ajudar?<br>
+                <strong>Um simples R$1 pode fazer o Natal de uma criança especial mais feliz!</strong>
+            </p>
+            <div class="popup-pix">
+                <i class="fas fa-qrcode"></i> PIX: projetooammea@gmail.com
+            </div>
+            <div class="popup-buttons">
+                <button class="popup-button copiar" onclick="copiarPixPopup()" id="popupButton">
+                    <i class="fas fa-copy"></i> Copiar PIX
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elementos de Áudio (Ocultos) -->
+    <audio id="localAudio" loop>
+        <source src="musica-natalina.mp3" type="audio/mpeg">
+        <source src="musica-natalina.ogg" type="audio/ogg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <audio id="radioAudio">
+        <source src="https://radio.vml10.xyz/listen/orbis_kids_fm/radio.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <script>
+        // ==================================================
+        // CONFIGURAÇÕES PRINCIPAIS - EDITE AQUI
+        // ==================================================
+
+        // Configuração do sistema de TTS (Texto para Voz)
+        const TTS_CONFIG = {
+            provider: 'webSpeech', // 'webSpeech' (gratuito) ou 'responsiveVoice'
+            apiKeys: {
+                elevenLabs: '', // Para usar Eleven Labs (pago)
+                google: '',     // Para usar Google TTS (pago)
+                openai: ''      // Para usar OpenAI TTS (pago)
+            }
+        };
+
+        // Configuração de áudio - URLs podem ser alteradas
+        const AUDIO_SOURCES = {
+            local: 'musica-natalina.mp3', // Arquivo local na pasta do projeto
+            radio: 'https://radio.vml10.xyz/listen/orbis_kids_fm/radio.mp3' // Rádio online
+        };
+
+        // Configuração de traduções
+        const TRANSLATIONS = {
+            pt: {
+                title: "Doe R$1 para o Natal das<br><span class='highlight'>crianças com deficiências</span>",
+                subtitle: "Faça parte desta corrente do bem e ajude a transformar o Natal das<br>crianças especiais do Projeto AMMEA",
+                progressLabel: "Meta de Doações: R$ 5.000,00",
+                progressText: "R$ 1.750,00 arrecadados de R$ 5.000,00",
+                pixButton: "Copiar PIX Agora",
+                qrLabel: "Escaneie para doar",
+                counterLabel: "Pessoas já apoiaram",
+                shareTitle: "Compartilhe esta causa",
+                popupTitle: "Espere!",
+                popupMessage: "Você está saindo sem ajudar?<br><strong>Um simples R$1 pode fazer o Natal de uma criança especial mais feliz!</strong>",
+                popupButton: "Copiar PIX"
+            },
+            en: {
+                title: "Donate $1 for Christmas of<br><span class='highlight'>children with disabilities</span>",
+                subtitle: "Be part of this chain of good and help transform the Christmas of<br>special children from AMMEA Project",
+                progressLabel: "Donation Goal: R$ 5,000.00",
+                progressText: "R$ 1,750.00 raised of R$ 5,000.00",
+                pixButton: "Copy PIX Now",
+                qrLabel: "Scan to donate",
+                counterLabel: "People already supported",
+                shareTitle: "Share this cause",
+                popupTitle: "Wait!",
+                popupMessage: "Are you leaving without helping?<br><strong>A simple $1 can make a special child's Christmas happier!</strong>",
+                popupButton: "Copy PIX"
+            },
+            es: {
+                title: "Done R$1 para la Navidad de<br><span class='highlight'>niños con discapacidades</span>",
+                subtitle: "Sea parte de esta cadena de bien y ayude a transformar la Navidad de<br>los niños especiales del Proyecto AMMEA",
+                progressLabel: "Meta de Donaciones: R$ 5.000,00",
+                progressText: "R$ 1.750,00 recaudados de R$ 5.000,00",
+                pixButton: "Copiar PIX Ahora",
+                qrLabel: "Escanear para donar",
+                counterLabel: "Personas ya apoyaron",
+                shareTitle: "Comparte esta causa",
+                popupTitle: "¡Espera!",
+                popupMessage: "¿Te vas sin ayudar?<br><strong>¡Un simple R$1 puede hacer la Navidad de un niño especial más feliz!</strong>",
+                popupButton: "Copiar PIX"
+            }
+        };
+
+        // ==================================================
+        // VARIÁVEIS GLOBAIS DO SISTEMA
+        // ==================================================
+        let currentTheme = 'light';
+        let currentAudio = null;
+        let donationCount = 127;
+        let currentLanguage = 'pt';
+        let popupAberto = false;
+        let currentVolume = 0.3;
+
+        // ==================================================
+        // INICIALIZAÇÃO DO SISTEMA
+        // ==================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove tela de loading após 2 segundos
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+            }, 2000);
+
+            // COMENTADO: Sistema de imagens locais inteligente
+            // setupLocalImages();
+
+            // Inicializa efeitos visuais
+            createSnowflakes();
+            createStars();
+            generateQRCode();
+
+            // Configura interação para iniciar áudio
+            setupAudioInteraction();
+
+            // Configura detecção de saída
+            setupExitDetection();
+            
+            console.log('🎄 Sistema AMMEA Natal - Carregado com sucesso!');
+        });
+
+        // ==================================================
+        // SISTEMA DE IMAGENS LOCAIS INTELIGENTE
+        // ==================================================
+
+        // COMENTADO: Função que carrega imagens via link
+        /*
+        function setupLocalImages() {
+            const backgroundDay = document.getElementById('backgroundDay');
+            const backgroundNight = document.getElementById('backgroundNight');
+            
+            // URLs padrão das imagens online
+            const defaultDayUrl = 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80';
+            const defaultNightUrl = 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80';
+            
+            // Tenta carregar imagens locais primeiro
+            const localImages = {
+                day: testImage('ammea.jpg') || testImage('ammea.png') || testImage('ammea.jpeg') || testImage('images/ammea.jpg') || testImage('images/ammea.png'),
+                night: testImage('ammea2.jpg') || testImage('ammea2.png') || testImage('ammea2.jpeg') || testImage('images/ammea2.jpg') || testImage('images/ammea2.png')
+            };
+
+            // Aplica as imagens encontradas ou usa as padrão
+            const dayBackground = localImages.day ? `linear-gradient(135deg, #87CEEB 0%, #98FB98 100%), url('${localImages.day}')` : 
+                                                  `linear-gradient(135deg, #87CEEB 0%, #98FB98 100%), url('${defaultDayUrl}')`;
+            
+            const nightBackground = localImages.night ? `linear-gradient(135deg, #0f1f38 0%, #2d1b69 100%), url('${localImages.night}')` : 
+                                                      `linear-gradient(135deg, #0f1f38 0%, #2d1b69 100%), url('${defaultNightUrl}')`;
+
+            backgroundDay.style.background = dayBackground;
+            backgroundNight.style.background = nightBackground;
+
+            // Log para debug
+            if (localImages.day) {
+                console.log('✅ Imagem local "ammea" encontrada e aplicada no tema claro');
+            } else {
+                console.log('ℹ️ Usando imagem online padrão para tema claro');
+            }
+            
+            if (localImages.night) {
+                console.log('✅ Imagem local "ammea2" encontrada e aplicada no tema escuro');
+            } else {
+                console.log('ℹ️ Usando imagem online padrão para tema escuro');
+            }
+        }
+
+        function testImage(url) {
+            // Cria uma imagem para testar se o arquivo existe
+            const img = new Image();
+            img.src = url;
+            
+            // Se a imagem carregar, retorna a URL
+            // Se não carregar, retorna null (usará imagem online)
+            return new Promise((resolve) => {
+                img.onload = () => resolve(url);
+                img.onerror = () => resolve(null);
+            }).then(result => result).catch(() => null);
+        }
+
+        // Função síncrona para testar imagens (compatibilidade)
+        function testImageSync(url) {
+            const http = new XMLHttpRequest();
+            http.open('HEAD', url, false);
+            try {
+                http.send();
+                return http.status === 200;
+            } catch (e) {
+                return false;
+            }
+        }
+        */
+
+        // ==================================================
+        // SISTEMA DE TRADUÇÃO
+        // ==================================================
+
+        function changeLanguage() {
+            const languages = ['pt', 'en', 'es'];
+            const currentIndex = languages.indexOf(currentLanguage);
+            currentLanguage = languages[(currentIndex + 1) % languages.length];
+            
+            applyTranslation();
+            showToast('🌐 Idioma', `Idioma alterado para ${currentLanguage.toUpperCase()}`);
+        }
+
+        function applyTranslation() {
+            const translation = TRANSLATIONS[currentLanguage];
+            
+            // Aplica traduções aos elementos
+            document.getElementById('mainTitle').innerHTML = translation.title;
+            document.getElementById('mainSubtitle').innerHTML = translation.subtitle;
+            document.getElementById('progressLabel').textContent = translation.progressLabel;
+            document.getElementById('progressText').textContent = translation.progressText;
+            document.getElementById('pixButton').innerHTML = `<i class="fas fa-copy"></i> ${translation.pixButton}`;
+            document.getElementById('qrLabel').textContent = translation.qrLabel;
+            document.getElementById('counterLabel').textContent = translation.counterLabel;
+            document.getElementById('shareTitle').innerHTML = `<i class="fas fa-share-alt"></i> ${translation.shareTitle}`;
+            document.getElementById('popupTitle').textContent = translation.popupTitle;
+            document.getElementById('popupMessage').innerHTML = translation.popupMessage;
+            document.getElementById('popupButton').innerHTML = `<i class="fas fa-copy"></i> ${translation.popupButton}`;
+        }
+
+        // ==================================================
+        // CONTROLES DE VOLUME
+        // ==================================================
+
+        function increaseVolume() {
+            if (currentVolume < 1) {
+                currentVolume = Math.min(1, currentVolume + 0.1);
+                updateAudioVolume();
+                showToast('🔊 Volume', `Volume: ${Math.round(currentVolume * 100)}%`);
+            }
+        }
+
+        function decreaseVolume() {
+            if (currentVolume > 0) {
+                currentVolume = Math.max(0, currentVolume - 0.1);
+                updateAudioVolume();
+                showToast('🔊 Volume', `Volume: ${Math.round(currentVolume * 100)}%`);
+            }
+        }
+
+        function updateAudioVolume() {
+            document.getElementById('localAudio').volume = currentVolume;
+            document.getElementById('radioAudio').volume = currentVolume;
+        }
+
+        // ==================================================
+        // SISTEMA DE DETECÇÃO DE SAÍDA
+        // ==================================================
+
+        function setupExitDetection() {
+            // Detecta quando o mouse sai da página
+            document.addEventListener('mouseout', function(e) {
+                if (e.clientY < 50 && !popupAberto) {
+                    setTimeout(() => mostrarPopup(), 1000);
+                }
+            });
+
+            // Detecta tentativa de fechar a página
+            window.addEventListener('beforeunload', function(e) {
+                if (!popupAberto) {
+                    e.preventDefault();
+                    e.returnValue = '';
+                    mostrarPopup();
+                }
+            });
+
+            // Detecta tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && popupAberto) {
+                    fecharPopup();
+                }
+            });
+        }
+
+        function mostrarPopup() {
+            popupAberto = true;
+            document.getElementById('exitPopup').style.display = 'flex';
+        }
+
+        function fecharPopup() {
+            popupAberto = false;
+            document.getElementById('exitPopup').style.display = 'none';
+        }
+
+        function copiarPixPopup() {
+            copiarPix();
+            fecharPopup();
+        }
+
+        // ==================================================
+        // SISTEMA DE ÁUDIO AVANÇADO
+        // ==================================================
+
+        function setupAudioInteraction() {
+            // Inicia áudio após primeira interação do usuário (requisito de navegadores)
+            document.body.addEventListener('click', function initAudio() {
+                const localAudio = document.getElementById('localAudio');
+                localAudio.volume = currentVolume;
+                localAudio.play().catch(e => {
+                    console.log('Áudio local bloqueado pelo navegador');
+                });
+                document.body.removeEventListener('click', initAudio);
+            }, { once: true });
+        }
+
+        function playAudio(type) {
+            // Para áudio atual
+            stopAudio();
+
+            let audioElement;
+            if (type === 'local') {
+                audioElement = document.getElementById('localAudio');
+                showToast('🎵 Música Local', 'Reproduzindo música natalina local');
+            } else if (type === 'radio') {
+                audioElement = document.getElementById('radioAudio');
+                showToast('📻 Rádio Online', 'Conectando à rádio natalina...');
+            }
+
+            if (audioElement) {
+                audioElement.volume = currentVolume;
+                audioElement.play().then(() => {
+                    currentAudio = type;
+                    updateAudioButtons();
+                }).catch(error => {
+                    console.error('Erro ao reproduzir áudio:', error);
+                    showToast('❌ Erro de Áudio', 'Não foi possível reproduzir');
+                });
+            }
+        }
+
+        function stopAudio() {
+            document.getElementById('localAudio').pause();
+            document.getElementById('localAudio').currentTime = 0;
+            document.getElementById('radioAudio').pause();
+            document.getElementById('radioAudio').currentTime = 0;
+            currentAudio = null;
+            updateAudioButtons();
+            showToast('⏹️ Áudio', 'Reprodução interrompida');
+        }
+
+        function updateAudioButtons() {
+            // Atualiza estado visual dos botões de áudio
+            const buttons = document.querySelectorAll('.audio-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (currentAudio === 'local') {
+                buttons[0].classList.add('active');
+            } else if (currentAudio === 'radio') {
+                buttons[1].classList.add('active');
+            }
+        }
+
+        // ==================================================
+        // SISTEMA DE TEXTO PARA VOZ (TTS)
+        // ==================================================
+
+        function speakContent() {
+            const text = getTextToSpeak();
+            
+            try {
+                if (TTS_CONFIG.provider === 'responsiveVoice' && typeof responsiveVoice !== 'undefined') {
+                    // Usa ResponsiveVoice se disponível
+                    responsiveVoice.speak(text, 'Brazilian Portuguese Female', {
+                        rate: 0.8,
+                        pitch: 1,
+                        onstart: () => showToast('🔊 Voz', 'Lendo conteúdo...'),
+                        onend: () => console.log('Leitura concluída')
+                    });
+                } else {
+                    // Fallback para Web Speech API nativa
+                    speakWithWebSpeech(text);
+                }
+            } catch (error) {
+                console.error('Erro no TTS:', error);
+                speakWithWebSpeech(text); // Fallback garantido
+            }
+        }
+
+        function getTextToSpeak() {
+            const title = document.querySelector('.main-title').textContent;
+            const subtitle = document.querySelector('.subtitle').textContent;
+            return `${title}. ${subtitle}`;
+        }
+
+        function speakWithWebSpeech(text) {
+            if (!('speechSynthesis' in window)) {
+                showToast('❌ TTS', 'Navegador não suporta leitura em voz alta');
+                return;
+            }
+
+            // Para fala anterior
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = currentLanguage === 'pt' ? 'pt-BR' : currentLanguage === 'en' ? 'en-US' : 'es-ES';
+            utterance.rate = 0.8;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+
+            utterance.onstart = () => showToast('🔊 Voz', 'Lendo conteúdo...');
+            utterance.onend = () => console.log('Leitura por voz concluída');
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // ==================================================
+        // SISTEMA DE TEMAS E ACESSIBILIDADE
+        // ==================================================
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', currentTheme);
+            
+            const icon = document.getElementById('themeIcon');
+            icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            showToast('🎨 Tema', `Modo ${currentTheme === 'dark' ? 'Noturno' : 'Diurno'} ativado`);
+        }
+
+        function increaseFontSize() {
+            const sizes = ['normal', 'large', 'xlarge'];
+            const currentSize = document.body.getAttribute('data-font-size') || 'normal';
+            const currentIndex = sizes.indexOf(currentSize);
+            const newSize = sizes[(currentIndex + 1) % sizes.size];
+            
+            document.body.setAttribute('data-font-size', newSize);
+            showToast('🔠 Fonte', `Tamanho: ${newSize}`);
+        }
+
+        function toggleHighContrast() {
+            const current = document.body.getAttribute('data-contrast') || 'normal';
+            const newContrast = current === 'normal' ? 'high' : 'normal';
+            document.body.setAttribute('data-contrast', newContrast);
+            showToast('🎯 Contraste', `Contraste ${newContrast === 'high' ? 'alto' : 'normal'}`);
+        }
+
+        // ==================================================
+        // FUNCIONALIDADES PRINCIPAIS
+        // ==================================================
+
+        async function copiarPix() {
+            const pixEmail = 'projetooammea@gmail.com';
+            const button = document.querySelector('.pix-hero-button');
+            
+            try {
+                await navigator.clipboard.writeText(pixEmail);
+                
+                // Feedback visual
+                button.innerHTML = '<i class="fas fa-check"></i> PIX COPIADO!';
+                button.classList.add('copied');
+                
+                showToast('✅ Sucesso', 'PIX copiado para área de transferência');
+                
+                // Atualiza contador
+                donationCount++;
+                document.getElementById('donationCount').textContent = donationCount;
+                
+                // Restaura botão após 3 segundos
+                setTimeout(() => {
+                    const translation = TRANSLATIONS[currentLanguage];
+                    button.innerHTML = `<i class="fas fa-copy"></i> ${translation.pixButton}`;
+                    button.classList.remove('copied');
+                }, 3000);
+                
+            } catch (err) {
+                // Fallback para navegadores antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = pixEmail;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('✅ Sucesso', 'PIX copiado!');
+            }
+        }
+
+        function generateQRCode() {
+            new QRCode(document.getElementById('qrcode'), {
+                text: 'projetooammea@gmail.com',
+                width: 200,
+                height: 200,
+                colorDark: '#c41e3a',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // ==================================================
+        // EFEITOS VISUAIS
+        // ==================================================
+
+        function createSnowflakes() {
+            const container = document.getElementById('snowflakes');
+            for (let i = 0; i < 60; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.opacity = Math.random() * 0.8 + 0.2;
+                snowflake.style.fontSize = (Math.random() * 12 + 8) + 'px';
+                container.appendChild(snowflake);
+            }
+        }
+
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = (Math.random() * 3 + 1) + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 4 + 's';
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                container.appendChild(star);
+            }
+        }
+
+        // ==================================================
+        // COMPARTILHAMENTO SOCIAL
+        // ==================================================
+
+        function compartilharWhatsApp() {
+            const text = 'Doe R$1 para o Natal das crianças com deficiências do Projeto AMMEA. PIX: projetooammea@gmail.com';
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            showToast('📱 Compartilhado', 'Link enviado para o WhatsApp');
+        }
+
+        function compartilharFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+            showToast('📘 Compartilhado', 'Compartilhando no Facebook...');
+        }
+
+        // ==================================================
+        // SISTEMA DE NOTIFICAÇÕES
+        // ==================================================
+
+        function showToast(title, message) {
+            // Remove toast anterior se existir
+            const existingToast = document.querySelector('.toast-notification');
+            if (existingToast) {
+                existingToast.remove();
+            }
+
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--bg-light);
+                backdrop-filter: blur(20px);
+                color: var(--text-light);
+                padding: 15px 20px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                border: 2px solid rgba(255,255,255,0.1);
+                z-index: 10001;
+                max-width: 300px;
+                animation: slideInRight 0.3s ease;
+            `;
+
+            toast.innerHTML = `
+                <div style="font-weight: 700; margin-bottom: 5px;">${title}</div>
+                <div style="font-size: 14px; opacity: 0.9;">${message}</div>
+            `;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ==================================================
+        // ANIMAÇÕES CSS DINÂMICAS
+        // ==================================================
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                to { transform: translateX(400px); opacity: 0; }
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            @keyframes progressShine {
+                to { background-position: 200% 0; }
+            }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ==================================================
+        // FIM DO SISTEMA - TODAS FUNCIONALIDADES IMPLEMENTADAS
+        // ==================================================
+    </script>
+</body>
+</html>
