@@ -13,6 +13,9 @@
     
     <title>Doe R$1 - Projeto AMMEA | Natal Solidário</title>
     
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <!-- CDNs para recursos externos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,11 +106,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* COMENTADO: Imagem via link externo */
-            /* background: 
-                linear-gradient(135deg, #87CEEB 0%, #98FB98 100%),
-                url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); */
-            /* AGORA: Usando apenas imagem local */
             background: 
                 linear-gradient(135deg, #87CEEB 0%, #98FB98 100%),
                 url('images/ammea.jpg');
@@ -129,11 +127,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* COMENTADO: Imagem via link externo */
-            /* background: 
-                linear-gradient(135deg, #0f1f38 0%, #2d1b69 100%),
-                url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); */
-            /* AGORA: Usando apenas imagem local */
             background: 
                 linear-gradient(135deg, #0f1f38 0%, #2d1b69 100%),
                 url('images/ammea2.jpg');
@@ -210,14 +203,43 @@
             box-shadow: var(--shadow-lg);
             border: 2px solid rgba(255, 255, 255, 0.1);
             transition: var(--transition);
+            min-width: 300px;
+            cursor: move;
+        }
+
+        .audio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: move;
         }
 
         .audio-title {
             font-size: 14px;
             font-weight: 600;
             color: var(--text-light);
-            margin-bottom: 15px;
-            text-align: center;
+            margin: 0;
+        }
+
+        .close-audio {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-audio:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--primary-color);
         }
 
         .audio-buttons {
@@ -402,6 +424,75 @@
             margin-bottom: 40px;
             line-height: 1.6;
             opacity: 0.9;
+        }
+
+        /* ===== VISOR DE ENGAGEMENT MODERNO ===== */
+        .engagement-display {
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), rgba(139, 20, 32, 0.1), rgba(255, 215, 0, 0.1));
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 2px solid rgba(196, 30, 58, 0.2);
+            backdrop-filter: blur(10px);
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .typing-container {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .typing-text {
+            display: inline-block;
+            border-right: 3px solid var(--primary-color);
+            padding-right: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: var(--primary-color); }
+            51%, 100% { border-color: transparent; }
+        }
+
+        .engagement-stats {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            opacity: 0.8;
         }
 
         /* ===== BOTÃO PIX PRINCIPAL ===== */
@@ -637,6 +728,8 @@
                 left: 20px;
                 right: 20px;
                 border-radius: 20px;
+                min-width: unset;
+                width: calc(100% - 40px);
             }
             
             .accessibility-toolbar {
@@ -647,6 +740,23 @@
             .audio-buttons {
                 flex-wrap: wrap;
                 justify-content: center;
+            }
+
+            .engagement-display {
+                padding: 20px;
+            }
+
+            .typing-container {
+                font-size: 1rem;
+            }
+
+            .engagement-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .stat-item {
+                min-width: unset;
             }
         }
 
@@ -664,6 +774,44 @@
 
         .animate-fade-in-up {
             animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* ===== BOTÕES DE REDES SOCIAIS ===== */
+        .social-btn {
+            border: none;
+            padding: 14px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 700;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .social-btn.whatsapp {
+            background: #25D366;
+            color: white;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .social-btn.facebook {
+            background: #1877F2;
+            color: white;
+            box-shadow: 0 5px 20px rgba(24, 119, 242, 0.4);
+        }
+
+        .social-btn.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            box-shadow: 0 5px 20px rgba(220, 39, 67, 0.4);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
     </style>
 </head>
@@ -691,8 +839,13 @@
     <div class="stars-container" id="stars"></div>
 
     <!-- Painel de Controle de Áudio -->
-    <div class="audio-controls-panel">
-        <div class="audio-title">🎵 Controles de Mídia</div>
+    <div class="audio-controls-panel" id="audioPanel">
+        <div class="audio-header">
+            <div class="audio-title">🎵 Controles de Mídia</div>
+            <button class="close-audio" onclick="toggleAudioPanel()" title="Fechar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
         <div class="audio-buttons">
             <button class="audio-btn" onclick="playAudio('local')" title="Música Natalina Local">
                 <i class="fas fa-music"></i>
@@ -731,6 +884,9 @@
         <button class="tool-btn" onclick="toggleHighContrast()" title="Alto Contraste">
             <i class="fas fa-adjust"></i>
         </button>
+        <button class="tool-btn" onclick="toggleAudioPanel()" title="Mostrar/Ocultar Controles de Mídia">
+            <i class="fas fa-music"></i>
+        </button>
     </div>
 
     <!-- Conteúdo Principal -->
@@ -749,18 +905,24 @@
                 crianças especiais do Projeto AMMEA
             </p>
 
-            <!-- Barra de Progresso das Doações -->
-            <section class="progress-section animate-fade-in-up" style="margin: 30px 0; padding: 25px; background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), rgba(139, 20, 32, 0.1)); border-radius: 20px; border: 2px solid rgba(196, 30, 58, 0.2);">
-                <div style="font-size: 16px; color: var(--text-light); margin-bottom: 10px; font-weight: 600;" id="progressLabel">
-                    Meta de Doações: R$ 5.000,00
+            <!-- Visor de Engagement Moderno -->
+            <section class="engagement-display animate-fade-in-up">
+                <div class="typing-container" id="typingContainer">
+                    <span class="typing-text" id="typingText"></span>
                 </div>
-                <div style="width: 100%; height: 30px; background: rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden; position: relative; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
-                    <div style="height: 100%; background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700); background-size: 200% 100%; animation: progressShine 2s linear infinite; transition: width 0.5s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: #000; font-weight: 700; font-size: 14px; width: 35%;">
-                        35%
+                <div class="engagement-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="donationCount">12</span>
+                        <span class="stat-label">Apoiadores</span>
                     </div>
-                </div>
-                <div style="margin-top: 10px; font-size: 14px; color: var(--text-light); opacity: 0.8;" id="progressText">
-                    R$ 1.750,00 arrecadados de R$ 5.000,00
+                    <div class="stat-item">
+                        <span class="stat-number">R$ 150</span>
+                        <span class="stat-label">Arrecadados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="goalProgress">3%</span>
+                        <span class="stat-label">da Meta</span>
+                    </div>
                 </div>
             </section>
 
@@ -790,27 +952,20 @@
                 </div>
             </div>
 
-            <!-- Contador de Apoiadores -->
-            <div class="animate-fade-in-up" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 25px; border-radius: 20px; margin: 25px 0; box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);">
-                <div style="font-size: 15px; opacity: 0.95; margin-bottom: 8px; font-weight: 500;" id="counterLabel">
-                    Pessoas já apoiaram
-                </div>
-                <div style="font-size: 52px; font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);" id="donationCount">
-                    127
-                </div>
-            </div>
-
             <!-- Compartilhamento Social -->
             <section class="animate-fade-in-up" style="margin-top: 35px; padding-top: 25px; border-top: 3px solid rgba(196, 30, 58, 0.2);">
                 <div style="font-size: 17px; color: var(--text-light); margin-bottom: 18px; font-weight: 600;" id="shareTitle">
                     <i class="fas fa-share-alt"></i> Compartilhe esta causa
                 </div>
-                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <button class="social-btn" onclick="compartilharWhatsApp()" style="background: #25D366; color: white; border: none; padding: 14px 30px; border-radius: 30px; cursor: pointer; font-size: 17px; font-weight: 700; transition: var(--transition); display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);">
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <button class="social-btn whatsapp" onclick="compartilharWhatsApp()">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </button>
-                    <button class="social-btn" onclick="compartilharFacebook()" style="background: #1877F2; color: white; border: none; padding: 14px 30px; border-radius: 30px; cursor: pointer; font-size: 17px; font-weight: 700; transition: var(--transition); display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 20px rgba(24, 119, 242, 0.4);">
+                    <button class="social-btn facebook" onclick="compartilharFacebook()">
                         <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                    <button class="social-btn instagram" onclick="compartilharInstagram()">
+                        <i class="fab fa-instagram"></i> Instagram
                     </button>
                 </div>
             </section>
@@ -849,23 +1004,21 @@
     </audio>
 
     <audio id="radioAudio">
-        <source src=>
+        <source src="https://radio.vml10.xyz/listen/orbis_kids_fm/radio.mp3" type="audio/mpeg">
         Seu navegador não suporta áudio.
     </audio>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         // ==================================================
         // CONFIGURAÇÕES PRINCIPAIS - EDITE AQUI
-        // =================================================="https://radio.vml10.xyz/listen/orbis_kids_fm/radio.mp3" type="audio/mpeg"
+        // ==================================================
 
         // Configuração do sistema de TTS (Texto para Voz)
         const TTS_CONFIG = {
             provider: 'webSpeech', // 'webSpeech' (gratuito) ou 'responsiveVoice'
-            apiKeys: {
-                elevenLabs: '', // Para usar Eleven Labs (pago)
-                google: '',     // Para usar Google TTS (pago)
-                openai: ''      // Para usar OpenAI TTS (pago)
-            }
         };
 
         // Configuração de áudio - URLs podem ser alteradas
@@ -874,16 +1027,28 @@
             radio: 'https://radio.vml10.xyz/listen/orbis_kids_fm/radio.mp3' // Rádio online
         };
 
+        // Mensagens de engajamento para o visor
+        const ENGAGEMENT_MESSAGES = [
+            "🌟 Juntos podemos fazer um Natal mais feliz!",
+            "💝 Cada R$1 faz a diferença na vida de uma criança",
+            "🎁 12 pessoas já apoiaram esta causa!",
+            "✨ Obrigado por acreditar no nosso projeto!",
+            "❤️ Sua doação transforma vidas!",
+            "🎄 Vamos espalhar alegria neste Natal!",
+            "🤝 Unidos somos mais fortes!",
+            "💫 A generosidade é o maior presente!",
+            "🎅 Faça parte desta corrente do bem!",
+            "🌈 Transforme o Natal com um simples gesto!"
+        ];
+
         // Configuração de traduções
         const TRANSLATIONS = {
             pt: {
                 title: "Doe R$1 para o Natal das<br><span class='highlight'>crianças com deficiências</span>",
                 subtitle: "Faça parte desta corrente do bem e ajude a transformar o Natal das<br>crianças especiais do Projeto AMMEA",
-                progressLabel: "Meta de Doações: R$ 5.000,00",
-                progressText: "R$ 1.750,00 arrecadados de R$ 5.000,00",
                 pixButton: "Copiar PIX Agora",
                 qrLabel: "Escaneie para doar",
-                counterLabel: "Pessoas já apoiaram",
+                counterLabel: "Apoiadores",
                 shareTitle: "Compartilhe esta causa",
                 popupTitle: "Espere!",
                 popupMessage: "Você está saindo sem ajudar?<br><strong>Um simples R$1 pode fazer o Natal de uma criança especial mais feliz!</strong>",
@@ -892,11 +1057,9 @@
             en: {
                 title: "Donate $1 for Christmas of<br><span class='highlight'>children with disabilities</span>",
                 subtitle: "Be part of this chain of good and help transform the Christmas of<br>special children from AMMEA Project",
-                progressLabel: "Donation Goal: R$ 5,000.00",
-                progressText: "R$ 1,750.00 raised of R$ 5,000.00",
                 pixButton: "Copy PIX Now",
                 qrLabel: "Scan to donate",
-                counterLabel: "People already supported",
+                counterLabel: "Supporters",
                 shareTitle: "Share this cause",
                 popupTitle: "Wait!",
                 popupMessage: "Are you leaving without helping?<br><strong>A simple $1 can make a special child's Christmas happier!</strong>",
@@ -905,11 +1068,9 @@
             es: {
                 title: "Done R$1 para la Navidad de<br><span class='highlight'>niños con discapacidades</span>",
                 subtitle: "Sea parte de esta cadena de bien y ayude a transformar la Navidad de<br>los niños especiales del Proyecto AMMEA",
-                progressLabel: "Meta de Donaciones: R$ 5.000,00",
-                progressText: "R$ 1.750,00 recaudados de R$ 5.000,00",
                 pixButton: "Copiar PIX Ahora",
                 qrLabel: "Escanear para donar",
-                counterLabel: "Personas ya apoyaron",
+                counterLabel: "Apoiadores",
                 shareTitle: "Comparte esta causa",
                 popupTitle: "¡Espera!",
                 popupMessage: "¿Te vas sin ayudar?<br><strong>¡Un simple R$1 puede hacer la Navidad de un niño especial más feliz!</strong>",
@@ -922,10 +1083,14 @@
         // ==================================================
         let currentTheme = 'light';
         let currentAudio = null;
-        let donationCount = 127;
+        let donationCount = 12; // ATUALIZADO: De 127 para 12
         let currentLanguage = 'pt';
         let popupAberto = false;
         let currentVolume = 0.3;
+        let audioPanelVisible = true;
+        let typingInterval;
+        let currentMessageIndex = 0;
+        let currentCharIndex = 0;
 
         // ==================================================
         // INICIALIZAÇÃO DO SISTEMA
@@ -935,9 +1100,6 @@
             setTimeout(() => {
                 document.getElementById('loadingScreen').style.display = 'none';
             }, 2000);
-
-            // COMENTADO: Sistema de imagens locais inteligente
-            // setupLocalImages();
 
             // Inicializa efeitos visuais
             createSnowflakes();
@@ -950,78 +1112,140 @@
             // Configura detecção de saída
             setupExitDetection();
             
+            // Inicializa sistema de arrastar para painel de áudio
+            setupDraggablePanel();
+            
+            // Inicializa sistema de digitação
+            startTypingEffect();
+            
             console.log('🎄 Sistema AMMEA Natal - Carregado com sucesso!');
         });
 
         // ==================================================
-        // SISTEMA DE IMAGENS LOCAIS INTELIGENTE
+        // SISTEMA DE ARRASTAR PAINEL DE ÁUDIO
         // ==================================================
 
-        // COMENTADO: Função que carrega imagens via link
-        /*
-        function setupLocalImages() {
-            const backgroundDay = document.getElementById('backgroundDay');
-            const backgroundNight = document.getElementById('backgroundNight');
-            
-            // URLs padrão das imagens online
-            const defaultDayUrl = 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80';
-            const defaultNightUrl = 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80';
-            
-            // Tenta carregar imagens locais primeiro
-            const localImages = {
-                day: testImage('ammea.jpg') || testImage('ammea.png') || testImage('ammea.jpeg') || testImage('images/ammea.jpg') || testImage('images/ammea.png'),
-                night: testImage('ammea2.jpg') || testImage('ammea2.png') || testImage('ammea2.jpeg') || testImage('images/ammea2.jpg') || testImage('images/ammea2.png')
-            };
+        function setupDraggablePanel() {
+            const audioPanel = document.getElementById('audioPanel');
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
 
-            // Aplica as imagens encontradas ou usa as padrão
-            const dayBackground = localImages.day ? `linear-gradient(135deg, #87CEEB 0%, #98FB98 100%), url('${localImages.day}')` : 
-                                                  `linear-gradient(135deg, #87CEEB 0%, #98FB98 100%), url('${defaultDayUrl}')`;
+            audioPanel.addEventListener("mousedown", dragStart);
+            audioPanel.addEventListener("touchstart", dragStart);
+            document.addEventListener("mouseup", dragEnd);
+            document.addEventListener("touchend", dragEnd);
+            document.addEventListener("mousemove", drag);
+            document.addEventListener("touchmove", drag);
+
+            function dragStart(e) {
+                if (e.type === "touchstart") {
+                    initialX = e.touches[0].clientX - xOffset;
+                    initialY = e.touches[0].clientY - yOffset;
+                } else {
+                    initialX = e.clientX - xOffset;
+                    initialY = e.clientY - yOffset;
+                }
+
+                if (e.target.classList.contains('audio-header') || 
+                    e.target.classList.contains('audio-title') ||
+                    e.target.closest('.audio-header')) {
+                    isDragging = true;
+                    audioPanel.style.transition = 'none';
+                }
+            }
+
+            function dragEnd() {
+                initialX = currentX;
+                initialY = currentY;
+                isDragging = false;
+                audioPanel.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    
+                    if (e.type === "touchmove") {
+                        currentX = e.touches[0].clientX - initialX;
+                        currentY = e.touches[0].clientY - initialY;
+                    } else {
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                    }
+
+                    xOffset = currentX;
+                    yOffset = currentY;
+
+                    setTranslate(currentX, currentY, audioPanel);
+                }
+            }
+
+            function setTranslate(xPos, yPos, el) {
+                el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+            }
+        }
+
+        // ==================================================
+        // SISTEMA DE VISOR DE ENGAGEMENT COM DIGITAÇÃO
+        // ==================================================
+
+        function startTypingEffect() {
+            typeMessage();
+        }
+
+        function typeMessage() {
+            const typingText = document.getElementById('typingText');
+            const message = ENGAGEMENT_MESSAGES[currentMessageIndex];
             
-            const nightBackground = localImages.night ? `linear-gradient(135deg, #0f1f38 0%, #2d1b69 100%), url('${localImages.night}')` : 
-                                                      `linear-gradient(135deg, #0f1f38 0%, #2d1b69 100%), url('${defaultNightUrl}')`;
-
-            backgroundDay.style.background = dayBackground;
-            backgroundNight.style.background = nightBackground;
-
-            // Log para debug
-            if (localImages.day) {
-                console.log('✅ Imagem local "ammea" encontrada e aplicada no tema claro');
+            if (currentCharIndex < message.length) {
+                typingText.textContent += message.charAt(currentCharIndex);
+                currentCharIndex++;
+                setTimeout(typeMessage, 50);
             } else {
-                console.log('ℹ️ Usando imagem online padrão para tema claro');
+                setTimeout(eraseMessage, 2000);
             }
+        }
+
+        function eraseMessage() {
+            const typingText = document.getElementById('typingText');
             
-            if (localImages.night) {
-                console.log('✅ Imagem local "ammea2" encontrada e aplicada no tema escuro');
+            if (currentCharIndex > 0) {
+                typingText.textContent = typingText.textContent.substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+                setTimeout(eraseMessage, 30);
             } else {
-                console.log('ℹ️ Usando imagem online padrão para tema escuro');
+                currentMessageIndex = (currentMessageIndex + 1) % ENGAGEMENT_MESSAGES.length;
+                setTimeout(typeMessage, 500);
             }
         }
 
-        function testImage(url) {
-            // Cria uma imagem para testar se o arquivo existe
-            const img = new Image();
-            img.src = url;
+        // ==================================================
+        // CONTROLES DO PAINEL DE ÁUDIO
+        // ==================================================
+
+        function toggleAudioPanel() {
+            const audioPanel = document.getElementById('audioPanel');
+            audioPanelVisible = !audioPanelVisible;
             
-            // Se a imagem carregar, retorna a URL
-            // Se não carregar, retorna null (usará imagem online)
-            return new Promise((resolve) => {
-                img.onload = () => resolve(url);
-                img.onerror = () => resolve(null);
-            }).then(result => result).catch(() => null);
-        }
-
-        // Função síncrona para testar imagens (compatibilidade)
-        function testImageSync(url) {
-            const http = new XMLHttpRequest();
-            http.open('HEAD', url, false);
-            try {
-                http.send();
-                return http.status === 200;
-            } catch (e) {
-                return false;
+            if (audioPanelVisible) {
+                audioPanel.style.display = 'block';
+                setTimeout(() => {
+                    audioPanel.style.opacity = '1';
+                    audioPanel.style.transform = 'translate3d(0, 0, 0) scale(1)';
+                }, 10);
+            } else {
+                audioPanel.style.opacity = '0';
+                audioPanel.style.transform = 'translate3d(0, 0, 0) scale(0.8)';
+                setTimeout(() => {
+                    audioPanel.style.display = 'none';
+                }, 300);
             }
         }
-        */
 
         // ==================================================
         // SISTEMA DE TRADUÇÃO
@@ -1042,11 +1266,8 @@
             // Aplica traduções aos elementos
             document.getElementById('mainTitle').innerHTML = translation.title;
             document.getElementById('mainSubtitle').innerHTML = translation.subtitle;
-            document.getElementById('progressLabel').textContent = translation.progressLabel;
-            document.getElementById('progressText').textContent = translation.progressText;
             document.getElementById('pixButton').innerHTML = `<i class="fas fa-copy"></i> ${translation.pixButton}`;
             document.getElementById('qrLabel').textContent = translation.qrLabel;
-            document.getElementById('counterLabel').textContent = translation.counterLabel;
             document.getElementById('shareTitle').innerHTML = `<i class="fas fa-share-alt"></i> ${translation.shareTitle}`;
             document.getElementById('popupTitle').textContent = translation.popupTitle;
             document.getElementById('popupMessage').innerHTML = translation.popupMessage;
@@ -1256,7 +1477,7 @@
             const sizes = ['normal', 'large', 'xlarge'];
             const currentSize = document.body.getAttribute('data-font-size') || 'normal';
             const currentIndex = sizes.indexOf(currentSize);
-            const newSize = sizes[(currentIndex + 1) % sizes.size];
+            const newSize = sizes[(currentIndex + 1) % sizes.length];
             
             document.body.setAttribute('data-font-size', newSize);
             showToast('🔠 Fonte', `Tamanho: ${newSize}`);
@@ -1368,6 +1589,10 @@
             const url = encodeURIComponent(window.location.href);
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
             showToast('📘 Compartilhado', 'Compartilhando no Facebook...');
+        }
+
+        function compartilharInstagram() {
+            showToast('📷 Instagram', 'Salve a imagem do QR Code e compartilhe no Instagram!');
         }
 
         // ==================================================
