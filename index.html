@@ -1063,6 +1063,11 @@
             // Inicializa sistema de digitação
             startTypingEffect();
             
+            // Inicia áudio automaticamente
+            setTimeout(() => {
+                playAudio('local');
+            }, 1000);
+            
             console.log('🎄 Sistema AMMEA Natal - Carregado com sucesso!');
         });
 
@@ -1517,23 +1522,68 @@
         }
 
         // ==================================================
-        // COMPARTILHAMENTO SOCIAL
+        // COMPARTILHAMENTO SOCIAL MELHORADO
         // ==================================================
 
         function compartilharWhatsApp() {
-            const text = 'Doe R$1 para o Natal das crianças com deficiências do Projeto AMMEA. PIX: projetooammea@gmail.com';
+            const text = `🎄 *Natal Solidário - Projeto AMMEA* 🎄
+
+Ajude a transformar o Natal das crianças com deficiências! 
+
+💝 *Como ajudar:*
+• Doe apenas R$1 via PIX
+• Chave PIX: projetooammea@gmail.com
+• Ou acesse: https://curtar1.vml10.xyz/Natal-das-crianças-especiais-do-Projeto-AMMEA
+
+✨ *Sobre o Projeto:*
+O Projeto AMMEA trabalha com crianças especiais, proporcionando um Natal mais feliz e acolhedor para elas e suas famílias.
+
+🤝 *Cada R$1 faz a diferença!*
+Juntos podemos espalhar alegria e esperança neste Natal.
+
+#NatalSolidário #ProjetoAMMEA #FaçaABoaAção`;
+
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-            showToast('📱 Compartilhado', 'Link enviado para o WhatsApp');
+            showToast('📱 Compartilhado', 'Mensagem enviada para o WhatsApp');
         }
 
         function compartilharFacebook() {
-            const url = encodeURIComponent(window.location.href);
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+            const url = 'https://curtar1.vml10.xyz/Natal-das-crianças-especiais-do-Projeto-AMMEA';
+            const quote = `🎄 Natal Solidário - Projeto AMMEA 🎄
+
+Ajude a transformar o Natal das crianças com deficiências! Com apenas R$1 via PIX (projetooammea@gmail.com), você pode fazer a diferença na vida de uma criança especial. 
+
+Cada doação, por menor que seja, ajuda a espalhar alegria e esperança neste Natal. Vamos juntos fazer uma corrente do bem! 
+
+#NatalSolidário #ProjetoAMMEA #FaçaABoaAção`;
+
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(quote)}`, '_blank');
             showToast('📘 Compartilhado', 'Compartilhando no Facebook...');
         }
 
         function compartilharInstagram() {
-            showToast('📷 Instagram', 'Salve a imagem do QR Code e compartilhe no Instagram!');
+            showToast('📷 Instagram', 'Salve a imagem do QR Code e compartilhe no Instagram com a hashtag #NatalSolidárioAMMEA!');
+            
+            // Mensagem para copiar e colar no Instagram
+            const instagramText = `🎄 *Natal Solidário - Projeto AMMEA* 🎄
+
+Ajude a transformar o Natal das crianças com deficiências! 
+
+✨ *Como ajudar:*
+• Doe apenas R$1 via PIX
+• Chave PIX: projetooammea@gmail.com
+• Ou escaneie o QR Code na imagem
+
+💝 Cada R$1 faz a diferença na vida de uma criança especial!
+
+🤝 Vamos juntos espalhar alegria e esperança neste Natal!
+
+#NatalSolidário #ProjetoAMMEA #FaçaABoaAção #Doação #NatalDasCriançasEspeciais`;
+
+            // Copia o texto para a área de transferência
+            navigator.clipboard.writeText(instagramText).then(() => {
+                showToast('📋 Texto Copiado', 'Cole no Instagram com a imagem do QR Code!');
+            });
         }
 
         // ==================================================
