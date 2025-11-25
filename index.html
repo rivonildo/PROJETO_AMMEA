@@ -467,34 +467,6 @@
             51%, 100% { border-color: transparent; }
         }
 
-        .engagement-stats {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .stat-item {
-            text-align: center;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            opacity: 0.8;
-        }
-
         /* ===== BOTÃO PIX PRINCIPAL ===== */
         .pix-hero-button {
             background: linear-gradient(45deg, var(--accent-gold), #FFA500, var(--accent-gold));
@@ -749,15 +721,6 @@
             .typing-container {
                 font-size: 1rem;
             }
-
-            .engagement-stats {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .stat-item {
-                min-width: unset;
-            }
         }
 
         /* ===== ANIMAÇÕES DE ENTRADA ===== */
@@ -910,20 +873,6 @@
                 <div class="typing-container" id="typingContainer">
                     <span class="typing-text" id="typingText"></span>
                 </div>
-                <div class="engagement-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="donationCount">12</span>
-                        <span class="stat-label">Apoiadores</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">R$ 150</span>
-                        <span class="stat-label">Arrecadados</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="goalProgress">3%</span>
-                        <span class="stat-label">da Meta</span>
-                    </div>
-                </div>
             </section>
 
             <!-- Botão PIX Principal -->
@@ -1031,14 +980,14 @@
         const ENGAGEMENT_MESSAGES = [
             "🌟 Juntos podemos fazer um Natal mais feliz!",
             "💝 Cada R$1 faz a diferença na vida de uma criança",
-            "🎁 12 pessoas já apoiaram esta causa!",
             "✨ Obrigado por acreditar no nosso projeto!",
             "❤️ Sua doação transforma vidas!",
             "🎄 Vamos espalhar alegria neste Natal!",
             "🤝 Unidos somos mais fortes!",
             "💫 A generosidade é o maior presente!",
             "🎅 Faça parte desta corrente do bem!",
-            "🌈 Transforme o Natal com um simples gesto!"
+            "🌈 Transforme o Natal com um simples gesto!",
+            "🎁 Ajude a realizar sonhos neste Natal!"
         ];
 
         // Configuração de traduções
@@ -1048,7 +997,6 @@
                 subtitle: "Faça parte desta corrente do bem e ajude a transformar o Natal das<br>crianças especiais do Projeto AMMEA",
                 pixButton: "Copiar PIX Agora",
                 qrLabel: "Escaneie para doar",
-                counterLabel: "Apoiadores",
                 shareTitle: "Compartilhe esta causa",
                 popupTitle: "Espere!",
                 popupMessage: "Você está saindo sem ajudar?<br><strong>Um simples R$1 pode fazer o Natal de uma criança especial mais feliz!</strong>",
@@ -1059,7 +1007,6 @@
                 subtitle: "Be part of this chain of good and help transform the Christmas of<br>special children from AMMEA Project",
                 pixButton: "Copy PIX Now",
                 qrLabel: "Scan to donate",
-                counterLabel: "Supporters",
                 shareTitle: "Share this cause",
                 popupTitle: "Wait!",
                 popupMessage: "Are you leaving without helping?<br><strong>A simple $1 can make a special child's Christmas happier!</strong>",
@@ -1070,7 +1017,6 @@
                 subtitle: "Sea parte de esta cadena de bien y ayude a transformar la Navidad de<br>los niños especiales del Proyecto AMMEA",
                 pixButton: "Copiar PIX Ahora",
                 qrLabel: "Escanear para donar",
-                counterLabel: "Apoiadores",
                 shareTitle: "Comparte esta causa",
                 popupTitle: "¡Espera!",
                 popupMessage: "¿Te vas sin ayudar?<br><strong>¡Un simple R$1 puede hacer la Navidad de un niño especial más feliz!</strong>",
@@ -1083,7 +1029,6 @@
         // ==================================================
         let currentTheme = 'light';
         let currentAudio = null;
-        let donationCount = 12; // ATUALIZADO: De 127 para 12
         let currentLanguage = 'pt';
         let popupAberto = false;
         let currentVolume = 0.3;
@@ -1506,10 +1451,6 @@
                 button.classList.add('copied');
                 
                 showToast('✅ Sucesso', 'PIX copiado para área de transferência');
-                
-                // Atualiza contador
-                donationCount++;
-                document.getElementById('donationCount').textContent = donationCount;
                 
                 // Restaura botão após 3 segundos
                 setTimeout(() => {
